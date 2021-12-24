@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React,{ useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
+
+import NetWorkState from './NetWorkState';
 
 const Item = styled(Paper)(({ theme}) => ({
     ...theme.typography.body2,
@@ -13,21 +15,27 @@ const Item = styled(Paper)(({ theme}) => ({
 
 
 export default function Footer() {
+  const [nwState, setNwState] = useState(false);
+
+  const toggleState = () =>{
+    setNwState(!nwState);
+  };
   return (
     <Container
+      disableGutters={true}
+      maxWidth={false}
       sx={{
-        position: 'fixed',
-        bottom:'0'
+        bottom:0,
+        position:'fixed'
       }}
     >
       <Stack
-        direction={{ xs: 'column', sm:'row' }}
-        spacing={{ xs:1,sm:2,md:4 }}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
       >
-        <Item> item1 </Item>
-        <Item> item2 </Item>
-        <Item> item3 </Item>
-        <Item> item4 </Item>
+        <NetWorkState state={nwState} /> 
+        <Item onClick={toggleState}> item2 </Item>
       </Stack>
     </Container>
   );
